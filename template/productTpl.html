@@ -1,0 +1,14 @@
+<product>
+<div class="row">
+	<input type="text" name="" ng-model="article"><div>{{total.length}}</div>
+	<div class="col-md-12" ng-repeat="goods in total = (product.goods | filter:{id:article})">
+		<div class="col-md-4">
+			<img ng-src="{{goods.img}}" alt="">
+		</div>
+		<div class="col-md-8">
+			{{goods.content}}
+		</div>
+	</div>
+	
+</div>
+</product>

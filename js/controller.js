@@ -12,6 +12,9 @@ var app = angular.module('app', ['ngRoute']);
 		$routeProvider.when('/main/:id', {
 			templateUrl: 'template/newsTpl.html',
 		});
+		$routeProvider.when('/product', {
+			templateUrl: 'template/productTpl.html'
+		})
 		$routeProvider.otherwise({ redirectTo: '/main' });
 	}])
 app.directive('slider', function () {
@@ -89,6 +92,20 @@ app.directive('order', [function () {
 		}
 	};
 }])
+app.directive('product', ['goodsService', function (goodsService) {
+	return {
+		scope: {},
+		templateUrl: null,
+		restrict: 'E',
+		controllerAs: "product",
+		bindToController: true,
+		controller: function () {
+			var self = this;
+			var goodsPromise = goodsService.getGoods();
+			goodsPromise.then(function (val) {self.goods = val});
+		}
+	};
+}])
 app.factory('dataService', function($http, $q){
     return{
         getData: function(){
@@ -143,6 +160,19 @@ app.factory('orderService', ['$http','$q', function ($http, $q) {
 					d.reject(status);
 				});
 			return d.promise;	
+		}
+	};
+}])
+app.factory('goodsService', ['$http','$q', function ($http, $q) {
+	return {
+		getGoods: function () {
+			var d = $q.defer();
+			$http({method: 'POST', url: 'goods.json'}).success(function (data, status, headers, config) {
+				d.resolve(data.goods);
+			}).error(function() {
+				d.reject(status)
+			});
+			return d.promise;		
 		}
 	};
 }])
