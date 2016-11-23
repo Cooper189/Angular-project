@@ -1,0 +1,11 @@
+<news>
+	<!-- <ul>
+		<li ng-repeat="newsId in news"><a href="#/main/{{newsId.id}}" title="">{{newsId.title}}</a></li>
+	</ul> -->
+<div>	
+	<div ng-repeat="nee in post.news | filter: post.newsid">
+		<h2>{{nee.title}}</h2>
+		<div>{{nee.text}}</div>
+	</div>
+</div>	
+</news>

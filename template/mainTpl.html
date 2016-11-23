@@ -1,0 +1,24 @@
+<slider>
+	<ul class="slider">
+		<li ng-repeat="slides in main.nsw | filter:{id: main.fil}">
+			<img ng-src="{{slides.img}}">
+		</li>
+	</ul>
+	<button ng-click="main.left()">Left</button>
+	<button ng-click="main.right()">right</button>
+</slider>
+<h2>Очистка воды с 1936 года</h2>
+<div>Компания EUROWATER обладает огромным мировым опытом в области технических решений, производства и реализации систем очистки воды для промышленности с высоким качеством, энергоэффективностью и долгим сроком эксплуатации. Очистка воды заключается в выборе наиболее оптимальных материалов, внедрении ноу-хау, а так же в работе высококвалифицированных сотрудников. Мы гарантируем долгий срок службы, высокое качество, надежность и минимальные затраты на обслуживание. </div>
+<main-block>
+<div class="col-md-6 sub_block" ng-repeat="bloc in content.block" ng-init="content.nnn()">
+	<div class="row">
+		<div class="col-md-7">
+			<h4>{{bloc.title}}</h4>
+			<p>{{bloc.text}}</p>
+		</div>
+		<div class="col-md-5">
+			<img ng-src="{{bloc.img}}" alt="">
+		</div>
+	</div>
+</div>
+</main-block>

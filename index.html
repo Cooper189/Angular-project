@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script> 
+    <script src="js/controller.js"></script> 
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">	
+	
+	<title>Eurowater</title>
+</head>
+<body ng-app="app">
+	<div id="overlay">
+		<header class="container">
+		<div class="sub_head col-md-offset-1 col-md-10">
+			<img src="img/new_logo.png">
+		</div>
+		<div class="menu col-md-offset-1 col-md-10">
+			<ul>
+				<li><a href="#/main">Главная</a></li>
+				<li><a href="#/buy">Товар</a></li>
+				<li><a href="#/about">О нас</a></li>
+				<li><a href="#/contact">Контакты</a></li>
+			</ul>	
+		</div>	
+		</header>
+		<section class="container">
+		<div class="col-md-offset-1 col-md-10 block">
+			<div class="main_block col-md-9"> <ng-view></ng-view></div>
+			<div class="news_block col-md-3">
+				<news>
+					<ul>
+						<li ng-repeat="newsId in post.news"><a href="#/main/{{newsId.id}}" title="">{{newsId.title}}</a></li>
+					</ul>
+				</news>
+			</div>
+			</div>
+		</section>
+		
+	</div>
+</body>
+</html>

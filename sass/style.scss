@@ -1,0 +1,80 @@
+$fontColor: #323f41;
+$hoverColor: #337ab7;
+
+@mixin gradient($top, $bottom) {
+	background: -moz-linear-gradient(top, $top 0%,  $bottom 100%);
+    background: -webkit-linear-gradient(top, $top 0%,  $bottom 100%);
+    background: -o-linear-gradient(top, $top 0%,  $bottom 100%);
+    background: -ms-linear-gradient(top, $top 0%,  $bottom 100%);
+    background: linear-gradient(top, $top 0%,  $bottom 100%);
+}
+@mixin borderRadius($topLeft, $topRight, $bottomLeft :0, $bottomRight :0) {
+	border-top-left-radius:$topLeft; 
+	border-top-right-radius:$topRight;
+	border-bottom-right-radius: $bottomLeft;
+	border-bottom-left-radius: $bottomRight;
+}
+
+body, ul, li{
+	font-family: Arial, Helvetica, sans-serif;
+	color: $fontColor;
+	margin:0;
+	padding: 0;	
+}
+a{
+	text-decoration: none !important;
+	color: $fontColor;
+	&:hover {
+		color: $hoverColor;
+	} 
+}	
+#overlay {
+	width: 100%;
+	@include gradient(#EAEAEA, #C0C9CF);
+}
+header {
+	.sub_head {
+		margin-top: 25px;
+		margin-bottom: 25px;
+	}
+	.menu {
+		padding: 10px 10px;
+		@include borderRadius(25px, 25px);
+		@include gradient(#F6F6F6, #EAEAEA);
+		.active {
+			a {
+				color: red;
+			}	
+		}
+		ul li {
+			display: inline-block;
+			list-style: none;
+			margin-left: 25px;
+		}
+	}
+}
+section {
+	.block {
+	background-color: #fff;
+	}
+}
+.slider {
+	padding: 10px 0;
+	li {
+		list-style: none;
+	}
+}
+.sub_block {
+	padding: 10px;
+	font-size: 10px;
+	max-height: 220px;
+	overflow: hidden;
+	@include gradient(#F6F6F6, #EAEAEA);
+	border: 5px solid #fff;
+	img {
+		margin-top: 25px;
+	}
+}
+.active {
+	color: red;
+}

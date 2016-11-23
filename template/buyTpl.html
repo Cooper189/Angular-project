@@ -1,0 +1,35 @@
+<div class="row">
+<order>
+	<div class="col-md-4">
+		<div>
+			<ul>
+				<li ng-class="{active: sub.maino == 1}" ng-click="sub.maino = 1">
+					Водоподготовка для паровых котельных
+				</li>
+				<li ng-class="{active: sub.maino == 2}" ng-click="sub.maino = 2">
+					Вода для централизованного теплоснабжения
+				</li>
+				<li ng-class="{active: sub.maino == 3}" ng-click="sub.maino = 3">
+					Вода для технологических процесов
+				</li>
+				<li ng-class="{active: sub.maino == 4}" ng-click="sub.maino = 4">
+					Промывная вода
+				</li>
+				<li ng-class="{active: sub.maino == 5}" ng-click="sub.maino = 5">
+					Вода для систем охлаждения
+				</li>
+				<li ng-class="{active: sub.maino == 6}" ng-click="sub.maino = 6">
+					Вода для систем увлажнения
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div ng-repeat="orders in sub.order | filter: sub.maino">
+			<h2>{{orders.title}}</h2>
+			<img ng-src="{{orders.img}}">
+			<div>{{orders.content}}</div>
+		</div>
+	</div>
+	</order>
+</div>	
