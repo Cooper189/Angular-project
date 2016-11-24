@@ -58,7 +58,10 @@ app.directive('mainBlock', [function () {
 		controllerAs: "content",
 		bindToController: true,
 		controller: function (mainService, $resource) {
-			this.block = mainService.query();
+			var self = this;
+			mainService.save(function(val) {
+				self.block = val.slides;
+			})
 		},
 	};
 }])
@@ -73,7 +76,6 @@ app.directive('news', [function () {
 		controller: function (newsService, $routeParams) {
 			var self = this
 			var newsPromise = newsService.getNews();
-			console.log(newsService.getNews());
 			newsPromise.then(function (valu) {self.news = valu})
 			self.newsid = $routeParams.id;
 		}
@@ -124,7 +126,7 @@ app.factory('dataService', function($http, $q){
     }
 })
 app.factory('mainService', ['$resource', function ($resource) {
-			return $resource('main.json',{callback: "JSON_CALLBACK"});	
+			return $resource('main.json');	
 }])
 app.factory('newsService', ['$http','$q', function ($http, $q) {
 	return {
