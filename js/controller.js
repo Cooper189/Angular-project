@@ -25,16 +25,19 @@ app.directive('slider', function () {
 			controllerAs: "main",
  			bindToController: true,
  			controller: function (dataService, $timeout) {
- 				var self = this
+ 				var self = this;
+ 				var timeOut;
      			var promiseObj=dataService.getData();
        			 promiseObj.then(function(value) {
         			self.nsw = value;
        			});
        			self.fil = 1;
 				self.left = function() {
+					$timeout.cancel(timeOut);
 					self.fil = (self.fil == 1) ? 3 : --self.fil;
  				}
  				self.right = function () {
+ 					$timeout.cancel(timeOut);
 					self.fil = (self.fil == 3) ? 1 : ++self.fil;
  					}
  				self.play = function() {
