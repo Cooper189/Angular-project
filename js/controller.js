@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'ngResource']);
 	app.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.when('/main', {
 			templateUrl: 'template/mainTpl.html',
@@ -57,10 +57,8 @@ app.directive('mainBlock', [function () {
 		restrict: 'E',
 		controllerAs: "content",
 		bindToController: true,
-		controller: function (mainService) {
-			var self = this;
-			var promiseObj = mainService.getMain();
-			promiseObj.then(function (val) {self.block = val})		
+		controller: function (mainService, $resource) {
+			this.block = mainService.query();
 		},
 	};
 }])
@@ -75,6 +73,7 @@ app.directive('news', [function () {
 		controller: function (newsService, $routeParams) {
 			var self = this
 			var newsPromise = newsService.getNews();
+			console.log(newsService.getNews());
 			newsPromise.then(function (valu) {self.news = valu})
 			self.newsid = $routeParams.id;
 		}
@@ -124,19 +123,8 @@ app.factory('dataService', function($http, $q){
         }
     }
 })
-app.factory('mainService', ['$http','$q', function ($http, $q) {
-	return {
-		getMain: function () {
-			var defe = $q.defer();
-			$http({method: 'POST', url: 'main.json'}).success(
-				function (data, status, headers, config) {
-					defe.resolve(data.slides);
-				}).error(function() {
-					defe.reject(status);
-				});
-			return defe.promise;	
-		}
-	};
+app.factory('mainService', ['$resource', function ($resource) {
+			return $resource('main.json',{callback: "JSON_CALLBACK"});	
 }])
 app.factory('newsService', ['$http','$q', function ($http, $q) {
 	return {
