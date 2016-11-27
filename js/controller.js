@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngResource']);
+var app = angular.module('app', ['ngRoute', 'ngResource', 'ngAnimate']);
 	app.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.when('/main', {
 			templateUrl: 'template/mainTpl.html',
@@ -38,7 +38,7 @@ app.directive('slider', function () {
  				}
  				self.right = function () {
  					$timeout.cancel(timeOut);
-					self.fil = (self.fil == 3) ? 1 : ++self.fil;
+					self.fil = (self.fil == self.nsw.length) ? 1 : ++self.fil;
  					}
  				self.play = function() {
     				timeOut = $timeout(function() {

@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-md-8">
-		<div ng-repeat="orders in sub.order | filter: sub.maino">
+		<div ng-repeat="orders in sub.order | filter: sub.maino" class="animation">
 			<h2>{{orders.title}}</h2>
 			<img ng-src="{{orders.img}}">
 			<div>{{orders.content}}</div>

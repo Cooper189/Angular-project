@@ -43,7 +43,8 @@ section .block {
   background-color: #fff; }
 
 .slider {
-  padding: 10px 0; }
+  margin: 10px 0;
+  position: relative; }
   .slider li {
     list-style: none; }
 

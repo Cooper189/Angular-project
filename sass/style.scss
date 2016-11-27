@@ -59,7 +59,9 @@ section {
 	}
 }
 .slider {
-	padding: 10px 0;
+	margin: 10px 0;
+	position: relative;
+	// height: 187px;
 	li {
 		list-style: none;
 	}
