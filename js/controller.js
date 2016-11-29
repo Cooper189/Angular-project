@@ -24,17 +24,16 @@ app.directive('slider', function () {
 			restrict: 'E',
 			controllerAs: "main",
  			bindToController: true,
- 			controller: function (dataService, $timeout) {
+ 			controller: function (mainService, $timeout) {
  				var self = this;
  				var timeOut;
-     			var promiseObj=dataService.getData();
-       			 promiseObj.then(function(value) {
-        			self.nsw = value;
+     			mainService.save({params: 'slide'},function(value) {
+        			self.nsw = value.slides;
        			});
        			self.fil = 1;
 				self.left = function() {
 					$timeout.cancel(timeOut);
-					self.fil = (self.fil == 1) ? 3 : --self.fil;
+					self.fil = (self.fil == 1) ? self.nsw.length : --self.fil;
  				}
  				self.right = function () {
  					$timeout.cancel(timeOut);
@@ -57,15 +56,14 @@ app.directive('mainBlock', [function () {
 		restrict: 'E',
 		controllerAs: "content",
 		bindToController: true,
-		controller: function (mainService, $resource) {
+		controller: function (mainService) {
 			var self = this;
-			mainService.save(function(val) {
+			mainService.save({params: 'main'},function(val) {
 				self.block = val.slides;
 			})
 		},
 	};
 }])
-
 app.directive('news', [function () {
 	return {
 		scope: {},
@@ -73,10 +71,9 @@ app.directive('news', [function () {
 		restrict: 'E',
 		controllerAs: "post",
 		bindToController: true,
-		controller: function (newsService, $routeParams) {
+		controller: function (mainService, $routeParams) {
 			var self = this
-			var newsPromise = newsService.getNews();
-			newsPromise.then(function (valu) {self.news = valu})
+			mainService.save({params: 'news'}, function (valu) {self.news = valu.news})
 			self.newsid = $routeParams.id;
 		}
 	};
@@ -88,15 +85,14 @@ app.directive('order', [function () {
 		restrict: 'E',
 		controllerAs: "sub",
 		bindToController: true,
-		controller: function (orderService) {
+		controller: function (mainService) {
 			var self = this;
 			this.maino = 1;
-			var orderPromise = orderService.getOrder();
-			orderPromise.then(function (valu) {self.order = valu})
+			mainService.save({params: 'order'}, function (valu) {self.order = valu.order})
 		}
 	};
 }])
-app.directive('product', ['goodsService', function (goodsService) {
+app.directive('product', ['mainService', function (mainService) {
 	return {
 		scope: {},
 		templateUrl: null,
@@ -105,67 +101,12 @@ app.directive('product', ['goodsService', function (goodsService) {
 		bindToController: true,
 		controller: function () {
 			var self = this;
-			var goodsPromise = goodsService.getGoods();
-			goodsPromise.then(function (val) {self.goods = val});
+			mainService.save({params: 'goods'}, function (val) {self.goods = val.goods});
 		}
 	};
 }])
-app.factory('dataService', function($http, $q){
-    return{
-        getData: function(){
-            var deferred = $q.defer();
-            $http({method: 'POST', url: 'slide.json'}).
-             success(function(data, status, headers, config) {
-                deferred.resolve(data.slides);
-            }).
-            error(function(data, status, headers, config) {
-                deferred.reject(status);
-            });           
-            return deferred.promise;
-        }
-    }
-})
 app.factory('mainService', ['$resource', function ($resource) {
-			return $resource('main.json');	
-}])
-app.factory('newsService', ['$http','$q', function ($http, $q) {
-	return {
-		getNews: function () {
-			var deferred = $q.defer();
-			$http({method: 'POST', url: 'news.json'}).success(
-				function (data, status, headers, config) {
-					deferred.resolve(data.news);
-				}).error(function() {
-					deferred.reject(status);
-				});
-			return deferred.promise;
-		}
-	};
-}])
-app.factory('orderService', ['$http','$q', function ($http, $q) {
-	return {
-		getOrder: function () {
-			var d = $q.defer();
-			$http({method: 'POST', url: 'order.json'}).success(
-				function (data, status, headers, config) {
-					d.resolve(data.order);
-				}).error(function() {
-					d.reject(status);
-				});
-			return d.promise;	
-		}
-	};
-}])
-app.factory('goodsService', ['$http','$q', function ($http, $q) {
-	return {
-		getGoods: function () {
-			var d = $q.defer();
-			$http({method: 'POST', url: 'goods.json'}).success(function (data, status, headers, config) {
-				d.resolve(data.goods);
-			}).error(function() {
-				d.reject(status)
-			});
-			return d.promise;		
-		}
-	};
+			return $resource(':params.json', {
+				params: '@params'
+			});	
 }])
