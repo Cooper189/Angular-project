@@ -1,11 +1,9 @@
 <news>
-	<!-- <ul>
-		<li ng-repeat="newsId in news"><a href="#/main/{{newsId.id}}" title="">{{newsId.title}}</a></li>
-	</ul> -->
 <div>	
-	<div ng-repeat="nee in post.news | filter: post.newsid">
-		<h2>{{nee.title}}</h2>
-		<div>{{nee.text}}</div>
+	<div class="row">
+		<h2 class="col-md-12">{{post.news.title}}</h2>
+		<img ng-src="{{post.news.img}}" alt="{{post.news.title}}">
+		<div  class="col-md-12">{{post.news.text}}</div>
 	</div>
 </div>	
 </news>

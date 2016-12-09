@@ -14,7 +14,6 @@ $hoverColor: #337ab7;
 	border-bottom-right-radius: $bottomLeft;
 	border-bottom-left-radius: $bottomRight;
 }
-
 body, ul, li{
 	font-family: Arial, Helvetica, sans-serif;
 	color: $fontColor;
@@ -29,8 +28,12 @@ a{
 	} 
 }	
 #overlay {
-	width: 100%;
+	min-height: calc(100vh);
 	@include gradient(#EAEAEA, #C0C9CF);
+	.wrapper {
+		position: relative;
+  		min-height: 100%;
+	}
 }
 header {
 	.sub_head {
@@ -61,7 +64,7 @@ section {
 .slider {
 	margin: 10px 0;
 	position: relative;
-	// height: 187px;
+	min-height: 169px;
 	li {
 		list-style: none;
 	}
@@ -78,5 +81,12 @@ section {
 	}
 }
 .active {
-	color: red;
+	color: #0096b5;
+}
+footer {
+	.footer {
+		padding: 10px 10px;
+		@include borderRadius(0, 0, 25px, 25px);
+		@include gradient(#F6F6F6, #EAEAEA);
+	}
 }

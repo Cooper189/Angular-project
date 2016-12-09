@@ -13,8 +13,9 @@
 	<title>Eurowater</title>
 </head>
 <body ng-app="app">
-	<div id="overlay">
-		<header class="container">
+<div id="overlay">
+	<div class="wrapper container">
+		<header>
 		<div class="sub_head col-md-offset-1 col-md-10">
 			<img src="img/new_logo.png">
 		</div>
@@ -27,7 +28,7 @@
 			</ul>	
 		</div>	
 		</header>
-		<section class="container">
+		<section>
 		<div class="col-md-offset-1 col-md-10 block">
 			<div class="main_block col-md-9"> 
 				<ng-view></ng-view>
@@ -35,13 +36,18 @@
 			<div class="news_block col-md-3">
 				<news>
 					<ul>
-						<li ng-repeat="newsId in post.news"><a href="#/main/{{newsId.id}}" title="">{{newsId.title}}</a></li>
+						<li ng-repeat="newsId in post.posts"><a href="#/main/{{newsId.id}}" title="">{{newsId.title}}</a></li>
 					</ul>
 				</news>
 			</div>
 			</div>
 		</section>
-		
-	</div>
+		<footer>
+			<div class="col-md-offset-1 col-md-10 footer">
+				<span>ООО  | Украина | Tел. +38 044 355 03 80 | Факс. +38 044 579 23 24</span>
+			</div>
+		</footer>
+	</div>	
+</div>
 </body>
 </html>

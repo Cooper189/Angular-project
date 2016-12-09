@@ -17,14 +17,14 @@ var app = angular.module('app', ['ngRoute', 'ngResource', 'ngAnimate']);
 		})
 		$routeProvider.otherwise({ redirectTo: '/main' });
 	}])
-app.directive('slider', function () {
+app.directive('slider', ['mainService', '$timeout', function (mainService, $timeout) {
 		return {
 			scope: {},
 			templateUrl: null,
 			restrict: 'E',
 			controllerAs: "main",
  			bindToController: true,
- 			controller: function (mainService, $timeout) {
+ 			controller: function () {
  				var self = this;
  				var timeOut;
      			mainService.save({params: 'slide'},function(value) {
@@ -48,15 +48,15 @@ app.directive('slider', function () {
 				self.play();
 			}
 		};
-	})
-app.directive('mainBlock', [function () {
+	}])
+app.directive('mainBlock', ['mainService', function (mainService) {
 	return {
 		scope: {},
 		templateUrl: null,
 		restrict: 'E',
 		controllerAs: "content",
 		bindToController: true,
-		controller: function (mainService) {
+		controller: function () {
 			var self = this;
 			mainService.save({params: 'main'},function(val) {
 				self.block = val.slides;
@@ -64,28 +64,33 @@ app.directive('mainBlock', [function () {
 		},
 	};
 }])
-app.directive('news', [function () {
+app.directive('news', ['mainService', 'mainServ', '$routeParams', function (mainService, mainServ, $routeParams) {
 	return {
 		scope: {},
 		templateUrl: null,
 		restrict: 'E',
 		controllerAs: "post",
 		bindToController: true,
-		controller: function (mainService, $routeParams) {
-			var self = this
-			mainService.save({params: 'news'}, function (valu) {self.news = valu.news})
+		controller: function () {
+			var self = this;
 			self.newsid = $routeParams.id;
+			mainServ.save({param: self.newsid}, function (valu) {
+				self.news = valu;
+			});
+			mainService.save({params: 'news'}, function (valu) {
+				self.posts = valu.news;
+			})
 		}
 	};
 }])
-app.directive('order', [function () {
+app.directive('order', ['mainService', function (mainService) {
 	return {
 		scope: {},
 		templateUrl: null,
 		restrict: 'E',
 		controllerAs: "sub",
 		bindToController: true,
-		controller: function (mainService) {
+		controller: function () {
 			var self = this;
 			this.maino = 1;
 			mainService.save({params: 'order'}, function (valu) {self.order = valu.order})
@@ -108,5 +113,10 @@ app.directive('product', ['mainService', function (mainService) {
 app.factory('mainService', ['$resource', function ($resource) {
 			return $resource(':params.json', {
 				params: '@params'
+			});	
+}])
+app.factory('mainServ', ['$resource', function ($resource) {
+			return $resource('news/:param.json', {
+				param: '@param'
 			});	
 }])
