@@ -27,20 +27,20 @@ app.directive('slider', ['mainService', '$timeout', function (mainService, $time
  			controller: function () {
  				var self = this;
  				var timeOut;
-     			mainService.save({params: 'slide'},function(value) {
+     			mainService.save({params: 'slide'}, (value) => {
         			self.nsw = value.slides;
        			});
        			self.fil = 1;
-				self.left = function() {
+				self.left = () => {
 					$timeout.cancel(timeOut);
 					self.fil = (self.fil == 1) ? self.nsw.length : --self.fil;
  				}
- 				self.right = function () {
+ 				self.right =  () => {
  					$timeout.cancel(timeOut);
 					self.fil = (self.fil == self.nsw.length) ? 1 : ++self.fil;
  					}
- 				self.play = function() {
-    				timeOut = $timeout(function() {
+ 				self.play = () => {
+    				timeOut = $timeout(() => {
         			self.left();
          			self.play();
      				}, 5000);
@@ -58,7 +58,7 @@ app.directive('mainBlock', ['mainService', function (mainService) {
 		bindToController: true,
 		controller: function () {
 			var self = this;
-			mainService.save({params: 'main'},function(val) {
+			mainService.save({params: 'main'},(val) => {
 				self.block = val.slides;
 			})
 		},
@@ -74,10 +74,10 @@ app.directive('news', ['mainService', 'mainServ', '$routeParams', function (main
 		controller: function () {
 			var self = this;
 			self.newsid = $routeParams.id;
-			mainServ.save({param: self.newsid}, function (valu) {
+			mainServ.save({param: self.newsid}, (valu) => {
 				self.news = valu;
 			});
-			mainService.save({params: 'news'}, function (valu) {
+			mainService.save({params: 'news'}, (valu) => {
 				self.posts = valu.news;
 			})
 		}
@@ -93,7 +93,7 @@ app.directive('order', ['mainService', function (mainService) {
 		controller: function () {
 			var self = this;
 			this.maino = 1;
-			mainService.save({params: 'order'}, function (valu) {self.order = valu.order})
+			mainService.save({params: 'order'}, (valu) => {self.order = valu.order})
 		}
 	};
 }])
@@ -106,7 +106,7 @@ app.directive('product', ['mainService', function (mainService) {
 		bindToController: true,
 		controller: function () {
 			var self = this;
-			mainService.save({params: 'goods'}, function (val) {self.goods = val.goods});
+			mainService.save({params: 'goods'}, (val) => {self.goods = val.goods});
 		}
 	};
 }])
