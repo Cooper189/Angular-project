@@ -26,7 +26,7 @@ app.directive('slider', ['mainService', '$timeout', function (mainService, $time
  			bindToController: true,
  			controller: function () {
  				var timeOut;
-     			mainService.save({params: 'slide'}, (value) => {
+     			mainService.get({params: 'slide'}, (value) => {
         			this.nsw = value.slides;
        			});
        			this.fil = 1;
@@ -56,7 +56,7 @@ app.directive('mainBlock', ['mainService', function (mainService) {
 		controllerAs: "content",
 		bindToController: true,
 		controller: function () {
-			mainService.save({params: 'main'},(val) => {
+			mainService.get({params: 'main'},(val) => {
 				this.block = val.slides;
 			})
 		},
@@ -71,10 +71,10 @@ app.directive('news', ['mainService', 'mainServ', '$routeParams', function (main
 		bindToController: true,
 		controller: function () {
 			this.newsid = $routeParams.id;
-			mainServ.save({param: this.newsid}, (valu) => {
+			mainServ.get({param: this.newsid}, (valu) => {
 				this.news = valu;
 			});
-			mainService.save({params: 'news'}, (valu) => {
+			mainService.get({params: 'news'}, (valu) => {
 				this.posts = valu.news;
 			})
 		}
@@ -89,7 +89,7 @@ app.directive('order', ['mainService', function (mainService) {
 		bindToController: true,
 		controller: function () {
 			this.maino = 1;
-			mainService.save({params: 'order'}, (valu) => {this.order = valu.order})
+			mainService.get({params: 'order'}, (valu) => {this.order = valu.order})
 		}
 	};
 }])
@@ -101,7 +101,7 @@ app.directive('product', ['mainService', function (mainService) {
 		controllerAs: "product",
 		bindToController: true,
 		controller: function () {
-			mainService.save({params: 'goods'}, (val) => {this.goods = val.goods});
+			mainService.get({params: 'goods'}, (val) => {this.goods = val.goods});
 		}
 	};
 }])
