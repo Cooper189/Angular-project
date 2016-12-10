@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body, ul, li {
   font-family: Arial, Helvetica, sans-serif;
   color: #323f41;
@@ -94,5 +95,20 @@ footer .footer {
     -o-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     -ms-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); }
+    .main_block .goods_container i {
+      color: #ddd;
+      cursor: pointer; }
+      .main_block .goods_container i.rotate {
+        -moz-transform: rotate(180deg);
+        /* ╨Ф╨╗╤П Firefox */
+        -ms-transform: rotate(180deg);
+        /* ╨Ф╨╗╤П IE */
+        -webkit-transform: rotate(180deg);
+        /* ╨Ф╨╗╤П Safari, Chrome, iOS */
+        -o-transform: rotate(180deg);
+        /* ╨Ф╨╗╤П Opera */
+        transform: rotate(180deg); }
+      .main_block .goods_container i:hover {
+        color: #e35d31; }
   .main_block .goods_img img {
     width: 100%; }

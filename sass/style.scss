@@ -23,6 +23,14 @@ $whiteColor: #ffffff;
 	-webkit-box-shadow: $data;
 	-ms-box-shadow: $data;
 }
+@mixin rotate($deg) {
+	-moz-transform: rotate($deg); /* Для Firefox */
+    -ms-transform: rotate($deg); /* Для IE */
+    -webkit-transform: rotate($deg); /* Для Safari, Chrome, iOS */
+    -o-transform: rotate($deg); /* Для Opera */
+    transform: rotate($deg);
+}
+
 body, ul, li{
 	font-family: Arial, Helvetica, sans-serif;
 	color: $fontColor;
@@ -102,6 +110,16 @@ footer {
 .main_block {
 	padding-top: 25px;
 	.goods_container {
+		i {
+			color: #ddd;
+			cursor: pointer;
+			&.rotate {
+				@include rotate(180deg);
+			}
+			&:hover {
+				color: #e35d31;				
+			}
+		}
 		padding-bottom: 10px;
 		padding-top: 10px;
 		margin: 10px 0;

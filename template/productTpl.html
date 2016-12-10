@@ -9,7 +9,7 @@
 		<div>Артикул:{{goods.id}}</div>
 		<div>Название: {{goods.title}}</div>
 		<div>{{goods.size}}</div>
-		<i class="fa fa-chevron-circle-down" aria-hidden="true" ng-click="goodsBlock = !goodsBlock"></i>
+		<i class="fa fa-chevron-circle-down fa-2x" ng-class="{rotate: goodsBlock}" aria-hidden="true" ng-click="goodsBlock = !goodsBlock"></i>
 		<div ng-if="goodsBlock">
 		<div>Описание:</div>
 			{{goods.content}}
