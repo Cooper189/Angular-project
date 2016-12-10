@@ -25,27 +25,26 @@ app.directive('slider', ['mainService', '$timeout', function (mainService, $time
 			controllerAs: "main",
  			bindToController: true,
  			controller: function () {
- 				var self = this;
  				var timeOut;
      			mainService.save({params: 'slide'}, (value) => {
-        			self.nsw = value.slides;
+        			this.nsw = value.slides;
        			});
-       			self.fil = 1;
-				self.left = () => {
+       			this.fil = 1;
+				this.left = () => {
 					$timeout.cancel(timeOut);
-					self.fil = (self.fil == 1) ? self.nsw.length : --self.fil;
+					this.fil = (this.fil == 1) ? this.nsw.length : --this.fil;
  				}
- 				self.right =  () => {
+ 				this.right =  () => {
  					$timeout.cancel(timeOut);
-					self.fil = (self.fil == self.nsw.length) ? 1 : ++self.fil;
+					this.fil = (this.fil == this.nsw.length) ? 1 : ++this.fil;
  					}
- 				self.play = () => {
+ 				this.play = () => {
     				timeOut = $timeout(() => {
-        			self.left();
-         			self.play();
+        			this.left();
+         			this.play();
      				}, 5000);
 				};
-				self.play();
+				this.play();
 			}
 		};
 	}])
@@ -57,9 +56,8 @@ app.directive('mainBlock', ['mainService', function (mainService) {
 		controllerAs: "content",
 		bindToController: true,
 		controller: function () {
-			var self = this;
 			mainService.save({params: 'main'},(val) => {
-				self.block = val.slides;
+				this.block = val.slides;
 			})
 		},
 	};
@@ -72,13 +70,12 @@ app.directive('news', ['mainService', 'mainServ', '$routeParams', function (main
 		controllerAs: "post",
 		bindToController: true,
 		controller: function () {
-			var self = this;
-			self.newsid = $routeParams.id;
-			mainServ.save({param: self.newsid}, (valu) => {
-				self.news = valu;
+			this.newsid = $routeParams.id;
+			mainServ.save({param: this.newsid}, (valu) => {
+				this.news = valu;
 			});
 			mainService.save({params: 'news'}, (valu) => {
-				self.posts = valu.news;
+				this.posts = valu.news;
 			})
 		}
 	};
@@ -91,9 +88,8 @@ app.directive('order', ['mainService', function (mainService) {
 		controllerAs: "sub",
 		bindToController: true,
 		controller: function () {
-			var self = this;
 			this.maino = 1;
-			mainService.save({params: 'order'}, (valu) => {self.order = valu.order})
+			mainService.save({params: 'order'}, (valu) => {this.order = valu.order})
 		}
 	};
 }])
@@ -105,8 +101,7 @@ app.directive('product', ['mainService', function (mainService) {
 		controllerAs: "product",
 		bindToController: true,
 		controller: function () {
-			var self = this;
-			mainService.save({params: 'goods'}, (val) => {self.goods = val.goods});
+			mainService.save({params: 'goods'}, (val) => {this.goods = val.goods});
 		}
 	};
 }])
