@@ -1,7 +1,7 @@
 <div class="row">
 <order>
 	<div class="col-md-4">
-		<div>
+		<div class="nav_menu">
 			<ul>
 				<li ng-class="{active: sub.maino == 1}" ng-click="sub.maino = 1">
 					Водоподготовка для паровых котельных
@@ -28,7 +28,7 @@
 		<div ng-repeat="orders in sub.order | filter: sub.maino" class="animation">
 			<h2>{{orders.title}}</h2>
 			<img ng-src="{{orders.img}}">
-			<div>{{orders.content}}</div>
+			<p>{{orders.content}}</p>
 		</div>
 	</div>
 	</order>

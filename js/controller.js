@@ -25,26 +25,27 @@ app.directive('slider', ['mainService', '$timeout', function (mainService, $time
 			controllerAs: "main",
  			bindToController: true,
  			controller: function () {
+ 				var self = this;
  				var timeOut;
-     			mainService.get({params: 'slide'}, (value) => {
-        			this.nsw = value.slides;
+     			mainService.get({params: 'slide'}, function (value) {
+        			self.nsw = value.slides;
        			});
-       			this.fil = 1;
-				this.left = () => {
+       			self.fil = 1;
+				self.left = function () {
 					$timeout.cancel(timeOut);
-					this.fil = (this.fil == 1) ? this.nsw.length : --this.fil;
+					self.fil = (self.fil == 1) ? self.nsw.length : --self.fil;
  				}
- 				this.right =  () => {
+ 				self.right =  function () {
  					$timeout.cancel(timeOut);
-					this.fil = (this.fil == this.nsw.length) ? 1 : ++this.fil;
+					self.fil = (self.fil == self.nsw.length) ? 1 : ++self.fil;
  					}
- 				this.play = () => {
-    				timeOut = $timeout(() => {
-        			this.left();
-         			this.play();
+ 				self.play = function () {
+    				timeOut = $timeout(function () {
+        			self.left();
+         			self.play();
      				}, 5000);
 				};
-				this.play();
+				self.play();
 			}
 		};
 	}])
@@ -56,8 +57,9 @@ app.directive('mainBlock', ['mainService', function (mainService) {
 		controllerAs: "content",
 		bindToController: true,
 		controller: function () {
-			mainService.get({params: 'main'},(val) => {
-				this.block = val.slides;
+			var self = this;
+			mainService.get({params: 'main'}, function (val) {
+				self.block = val.slides;
 			})
 		},
 	};
@@ -70,12 +72,13 @@ app.directive('news', ['mainService', 'mainServ', '$routeParams', function (main
 		controllerAs: "post",
 		bindToController: true,
 		controller: function () {
-			this.newsid = $routeParams.id;
-			mainServ.get({param: this.newsid}, (valu) => {
-				this.news = valu;
+			var self = this;
+			self.newsid = $routeParams.id;
+			mainServ.get({param: self.newsid}, function (valu) {
+				self.news = valu;
 			});
-			mainService.get({params: 'news'}, (valu) => {
-				this.posts = valu.news;
+			mainService.get({params: 'news'}, function (valu) {
+				self.posts = valu.news;
 			})
 		}
 	};
@@ -88,8 +91,9 @@ app.directive('order', ['mainService', function (mainService) {
 		controllerAs: "sub",
 		bindToController: true,
 		controller: function () {
-			this.maino = 1;
-			mainService.get({params: 'order'}, (valu) => {this.order = valu.order})
+			var self = this;
+			self.maino = 1;
+			mainService.get({params: 'order'}, function (valu) {self.order = valu.order})
 		}
 	};
 }])
@@ -101,7 +105,8 @@ app.directive('product', ['mainService', function (mainService) {
 		controllerAs: "product",
 		bindToController: true,
 		controller: function () {
-			mainService.get({params: 'goods'}, (val) => {this.goods = val.goods});
+			var self = this;
+			mainService.get({params: 'goods'}, function (val) {self.goods = val.goods});
 		}
 	};
 }])
