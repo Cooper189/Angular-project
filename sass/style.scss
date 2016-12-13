@@ -2,6 +2,7 @@ $fontColor: #323f41;
 $hoverColor: #337ab7;
 $borderColor: #E9E9E9;
 $whiteColor: #ffffff;
+$blueColor: #0096b5;
 
 @mixin gradient($top, $bottom) {
 	background: -moz-linear-gradient(top, $top 0%,  $bottom 100%);
@@ -24,11 +25,16 @@ $whiteColor: #ffffff;
 	-ms-box-shadow: $data;
 }
 @mixin rotate($deg) {
-	-moz-transform: rotate($deg); /* Для Firefox */
-    -ms-transform: rotate($deg); /* Для IE */
-    -webkit-transform: rotate($deg); /* Для Safari, Chrome, iOS */
-    -o-transform: rotate($deg); /* Для Opera */
+	-moz-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    -webkit-transform: rotate($deg);
+    -o-transform: rotate($deg);
     transform: rotate($deg);
+}
+
+@mixin border($mainBr, $topBr :0, $leftBr:0) {
+	@if $topBr != 0 {border-top: $mainBr; border-bottom: $mainBr}
+	@if $leftBr != 0 {border-left: $mainBr; border-right: $mainBr}
 }
 
 body, ul, li{
@@ -74,6 +80,9 @@ header {
 	}
 }
 section {
+	.order_img {
+		max-width: 440px;
+	}
 	.about {
 		margin-bottom: 25px;
 		&.logo {
@@ -83,7 +92,7 @@ section {
 			width: 300px;
 		}
 		span {
-			color: #0096b5;
+			color: $blueColor;
 		} 
 	}
 	.block {
@@ -96,13 +105,14 @@ section {
 		li{
 			list-style: none;
 			cursor: pointer;
+			padding: 5px;
+			@include border(1px dashed $borderColor, 1)
 		}
 	}
 }
 .news_block {
 	ul {
-		border-bottom: 2px dashed #0096b5;
-		border-top: 2px dashed #0096b5;
+		@include border(2px dashed $blueColor, 1);
 		li {
 			list-style: none;
 			font-size: 12px;
@@ -112,7 +122,7 @@ section {
 				width: 10px;
 				height: 10px;
 				border-radius: 50%;
-				background-color: #0096b5;
+				background-color: $blueColor;
 				display: inline-block;
 				margin-right: 10px; 
 			}
@@ -155,9 +165,14 @@ section {
 		margin-top: 25px;
 	}
 }
-.active {
-	color: #0096b5;
+ul{
+	li{
+		&.active {
+	@include border(2px dashed #0096b5,1)
+		}
+	}
 }
+
 footer {
 	.footer {
 		padding: 10px 10px;
