@@ -114,6 +114,7 @@ section {
 	ul {
 		@include border(2px dashed $blueColor, 1);
 		li {
+			@include border(1px dashed $borderColor, 1);
 			list-style: none;
 			font-size: 12px;
 			margin: 10px 0;
@@ -130,6 +131,8 @@ section {
 	}
 }
 .slider_cont {
+	margin: 0 auto;
+	max-width: 663px;
 	.slide_menu {
 		position: absolute;
 		bottom: 0;
@@ -139,7 +142,7 @@ section {
 		position: absolute;
 		cursor: pointer;
 		bottom: 0;
-		left: 24%;
+		left: 28%;
 		&:last-child {
 			bottom: 0;
 			left: 35%;
@@ -189,7 +192,7 @@ footer {
 				@include rotate(180deg);
 			}
 			&:hover {
-				color: #e35d31;				
+				color: $blueColor;				
 			}
 		}
 		padding-bottom: 10px;

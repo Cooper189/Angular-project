@@ -1,6 +1,7 @@
 <product>
 <div class="row">
-	<input type="text" name="" ng-model="article"><div>{{total.length}}</div>
+	<div class="col-md-6"><label>Введите артикул: </label><input type="text" name="" ng-model="article" class="form-control col-md-6"></div>
+	<div class="col-md-12"><span>Найдено: </span>{{total.length}}</div>
 	<div class="col-md-11 goods_container" ng-repeat="goods in total = (product.goods | filter:{id:article})">
 		<div class="col-md-4 goods_img">
 			<img ng-src="{{goods.img}}" alt="">

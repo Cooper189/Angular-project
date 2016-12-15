@@ -67,6 +67,8 @@ section .block {
   border-top: 2px dashed #0096b5;
   border-bottom: 2px dashed #0096b5; }
   .news_block ul li {
+    border-top: 1px dashed #E9E9E9;
+    border-bottom: 1px dashed #E9E9E9;
     list-style: none;
     font-size: 12px;
     margin: 10px 0; }
@@ -80,6 +82,8 @@ section .block {
       margin-right: 10px; }
 
 .slider_cont {
+  margin: 0 auto;
+  max-width: 663px;
   position: relative; }
   .slider_cont .slide_menu {
     position: absolute;
@@ -88,7 +92,7 @@ section .block {
     position: absolute;
     cursor: pointer;
     bottom: 0;
-    left: 24%; }
+    left: 28%; }
     .slider_cont i:last-child {
       bottom: 0;
       left: 35%; }
@@ -151,6 +155,6 @@ footer .footer {
       -o-transform: rotate(180deg);
       transform: rotate(180deg); }
     .main_block .goods_container i:hover {
-      color: #e35d31; }
+      color: #0096b5; }
 .main_block .goods_img img {
   width: 100%; }
